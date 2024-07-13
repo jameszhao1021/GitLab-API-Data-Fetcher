@@ -6,7 +6,7 @@ This project is a Python script designed to fetch data from the GitLab API and s
 
 - Connects to the GitLab API using a private token.
 - Fetches groups data from the GitLab instance.
-- Dynamically creates a PostgreSQL database and table schema based on the fetched data. information. Once payment is confirmed, you can see your orders in Purchase History page.
+- Dynamically creates a PostgreSQL database and table schema based on the fetched data.
 - Inserts the fetched data into the PostgreSQL database. 
 - Utilises SQLAlchemy for database operations and psycopg2 for database connection.  
 

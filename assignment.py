@@ -1,4 +1,3 @@
-import requests
 import sqlalchemy as db
 from sqlalchemy import create_engine, Column, Integer, String, Text, Boolean, DateTime
 from sqlalchemy.ext.declarative import declarative_base
@@ -28,10 +27,10 @@ def create_database(database, user, password, host, port):
     postgres_conn.close()
 
 def fetch_data(api_key):
-    gl = gitlab.Gitlab('https://gitlab.boon.com.au', private_token=api_key)
+    gl = gitlab.Gitlab('https://gitlab.boon.com.au', private_token=api_key)  # Base URL for GitLab
     try:
-        projects = gl.projects.list(all=True)
-        return [project.attributes for project in projects]
+        groups = gl.groups.list()
+        return [group.attributes for group in groups]
     except gitlab.exceptions.GitlabGetError as e:
         print(f"Error fetching data: {e}")
         return None
@@ -56,18 +55,18 @@ def main():
     Base = declarative_base()
 
     # Fetch data from the API
-    projects = fetch_data(args.api_key)
-    if not projects:
+    groups = fetch_data(args.api_key)
+    if not groups:
         return
 
-    # Define attributes for the Project class
+    # Define attributes for the Group class
     attributes = {
-        '__tablename__': 'projects',
+        '__tablename__': 'groups',
         'id': Column(Integer, primary_key=True)
     }
 
     # Dynamically add columns based on JSON keys
-    for key, value in projects[0].items():
+    for key, value in groups[0].items():
         if key == 'id':
             continue
         elif isinstance(value, bool):
@@ -83,27 +82,27 @@ def main():
 
         attributes[key] = column
 
-    # Create the Project class with dynamic attributes
-    Project = type('Project', (Base,), attributes)
+    # Create the Group class with dynamic attributes
+    Group = type('Group', (Base,), attributes)
 
     # Create the table
     Base.metadata.create_all(engine)
 
     # Insert data into the table dynamically
-    for project_data in projects:
-        for key, value in project_data.items():
+    for group_data in groups:
+        for key, value in group_data.items():
             if isinstance(value, dict):
-                project_data[key] = json.dumps(value)
+                group_data[key] = json.dumps(value)
 
-        project_instance = Project()
-        for key, value in project_data.items():
-            setattr(project_instance, key, value)
-        session.add(project_instance)
+        group_instance = Group()
+        for key, value in group_data.items():
+            setattr(group_instance, key, value)
+        session.add(group_instance)
 
     session.commit()
     print("Data inserted successfully!")
 
 if __name__ == '__main__':
     # Run the project with the following command in the terminal:
-    # python assignment.py --api-key xeDpxei6UqEk5WUFSj85 --db-name assignment31 --db-user postgres --db-password dhdrsd3sb=-= --db-host localhost --db-port 5432
+    # python assignment.py --api-key xeDpxei6UqEk5WUFSj85 --db-name assignment31 --db-user postgres --db-password password --db-host localhost --db-port 5432
     main()

@@ -1,0 +1,8 @@
+{
+
+    "terminal.integrated.env.windows": {
+        "JAVA_HOME": "C:\\Users\\James\\Downloads\\openjdk-22.0.1_windows-x64_bin\\jdk-22.0.1",
+        "PATH": "C:\\Users\\James\\Downloads\\openjdk-22.0.1_windows-x64_bin\\jdk-22.0.1\\bin;${env:PATH}"
+      }
+      
+}

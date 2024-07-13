@@ -35,8 +35,7 @@ Run the script:
 ```
 python assignment.py --api-key YOUR_GITLAB_PRIVATE_TOKEN --db-name DATABASE_NAME --db-user DB_USER --db-password DB_PASSWORD --db-host DB_HOST --db-port DB_PORT
 ```
-github
-Example:
+Github Example:
 ```
 python assignment.py --api-key 123456 --db-name assignment --db-user postgres --db-password password --db-host localhost --db-port 5432
 ```

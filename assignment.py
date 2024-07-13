@@ -104,5 +104,5 @@ def main():
 
 if __name__ == '__main__':
     # Run the project with the following command in the terminal:
-    # python assignment.py --api-key xeDpxei6UqEk5WUFSj85 --db-name assignment31 --db-user postgres --db-password password --db-host localhost --db-port 5432
+    # python assignment.py --api-key xeDpxei6UqEk5WUFSj85 --db-name database --db-user postgres --db-password password --db-host localhost --db-port 5432
     main()

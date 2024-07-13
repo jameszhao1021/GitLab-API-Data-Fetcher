@@ -27,7 +27,7 @@ def create_database(database, user, password, host, port):
     postgres_conn.close()
 
 def fetch_data(api_key):
-    gl = gitlab.Gitlab('https://gitlab.boon.com.au', private_token=api_key)  # Base URL for GitLab
+    gl = gitlab.Gitlab('https://gitlab.boon.com.au', private_token=api_key)
     try:
         groups = gl.groups.list()
         return [group.attributes for group in groups]
@@ -104,3 +104,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+# Run the project with the following command in the terminal:
+# python assignment.py --api-key xeDpxei6UqEk5WUFSj85 --db-name database --db-user postgres --db-password password --db-host localhost --db-port 5432

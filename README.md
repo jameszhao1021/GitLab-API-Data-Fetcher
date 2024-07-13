@@ -22,6 +22,7 @@ This project is a Python script designed to fetch data from the GitLab API and s
 1. Clone the repository:
 ```
 git clone https://github.com/jameszhao1021/GitLab-API-Data-Fetcher.git
+cd gitlab-api-data-fetcher
 ```
 
 2. Install the required Python packages:
